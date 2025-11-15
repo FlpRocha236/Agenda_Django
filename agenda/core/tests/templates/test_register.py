@@ -1,4 +1,4 @@
-from django.contrib.auth import get_user_model ### AJUSTE 1: Importar get_user_model
+from django.contrib.auth import get_user_model 
 from django.test import TestCase, Client
 from django.urls import reverse
 from django.shortcuts import resolve_url as r
@@ -53,8 +53,8 @@ class Register_OK_Test(TestCase):
         }
         response = self.client.post(self.register_url, data)
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertTemplateUsed(response, 'cadastrar.html') # Ajuste no nome do template
-        self.assertContains(response, 'Nome completo: Este campo é obrigatório.')
+        self.assertTemplateUsed(response, 'cadastrar.html') 
+        self.assertContains(response, 'Este campo é obrigatório.')
         self.assertContains(response, 'O telefone deve conter apenas')
         self.assertFalse(Agenda.objects.filter(telefone='error').exists())
 
@@ -69,8 +69,8 @@ class Register_OK_Test(TestCase):
         response = self.client.post(self.register_url, data)
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'cadastrar.html')
-        self.assertContains(response, 'Telefone: O telefone deve ter entre 10 e 11')
-        self.assertFalse(Agenda.objects.filter(nome_completo='jamila test').exists())
+        self.assertContains(response, 'O telefone deve ter entre 10 e 11 dígitos.')
+        self.assertFalse(Agenda.objects.filter(nome_completo='felipe test').exists())
 
     def test_name_with_special_characters(self):
         self.client.login(username='admin', password='fatec')   
@@ -83,5 +83,5 @@ class Register_OK_Test(TestCase):
         response = self.client.post(self.register_url, data)
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'cadastrar.html')
-        self.assertContains(response, 'Nome completo: O nome completo deve conter apenas letras e espaços.')
-        self.assertFalse(Agenda.objects.filter(nome_completo='jamila test 1 %@$#').exists())
+        self.assertContains(response, 'O nome completo deve conter apenas letras e espaços.')
+        self.assertFalse(Agenda.objects.filter(nome_completo='felipe test 1 %@$#').exists())

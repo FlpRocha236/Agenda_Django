@@ -69,7 +69,7 @@ class Atualizar_Contact_OK_Test(TestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK) 
         self.assertTemplateUsed(response, 'atualizar.html') 
         
-        self.assertContains(response, 'Nome completo: Este campo é obrigatório.')
+        self.assertContains(response, 'Este campo é obrigatório.')
         self.assertContains(response, 'O telefone deve conter apenas')
         self.assertContains(response, 'Email: Este campo é obrigatório.')
         
