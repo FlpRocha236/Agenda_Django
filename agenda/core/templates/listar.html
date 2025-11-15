@@ -1,0 +1,214 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel de Contatos - Rock Edition</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Esquema de cores "Rock" */
+      --color-dark-bg: #1a1a1a;
+      --color-dark-accent: #2c2c2c;
+      --color-text-light: #f0f0f0;
+      --color-primary-rock: #e03a3e; /* Vermelho */
+      --color-warning-rock: #ffc107; /* Amarelo */
+      --color-danger-rock: #dc3545;  /* Vermelho perigo */
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: var(--color-dark-bg);
+      color: var(--color-text-light);
+      
+      /* 2. Fundo com textura*/
+      background-image: url('{% static "core/img/rock_bg.jpg" %}');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      
+      /* Ajustado para permitir que o card grande respire */
+      min-height: 100vh;
+      padding: 2rem 0; /* Adiciona padding vertical */
+    }
+
+    /* 3. Card de Listagem (Mais largo para a tabela) */
+    .list-card {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0.75rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      background-color: rgba(26, 26, 26, 0.9); /* Fundo semi-transparente */
+      color: var(--color-text-light);
+      padding: 3rem;
+      width: 90%; /* Usa porcentagem para ser responsivo */
+      max-width: 1100px; /* Bem mais largo para a tabela */
+      margin: 0 auto; /* Centraliza */
+    }
+
+    /* 4. Título ("Painel de Contatos") */
+    .list-card h2 {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 2.5rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+    }
+    
+    /* 5. Estilo dos Botões (Consistente com o tema) */
+    .btn {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: 1rem; /* Tamanho padrão para botões */
+      padding: 0.6rem 1.2rem;
+      border-radius: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+    }
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
+    /* Botões pequenos de ação na tabela */
+    .btn-sm {
+        font-size: 0.8rem;
+        padding: 0.25rem 0.5rem;
+    }
+
+    /* Cores dos Botões */
+    .btn-primary {
+      background-color: var(--color-primary-rock);
+      border-color: var(--color-primary-rock);
+    }
+    .btn-primary:hover { background-color: #ff5252; border-color: #ff5252; }
+    
+    .btn-warning {
+      background-color: var(--color-warning-rock);
+      border-color: var(--color-warning-rock);
+      color: var(--color-dark-bg); /* Texto escuro para contraste */
+    }
+    .btn-warning:hover { background-color: #ffdd44; border-color: #ffdd44; }
+
+    .btn-danger {
+      background-color: var(--color-danger-rock);
+      border-color: var(--color-danger-rock);
+    }
+    .btn-danger:hover { background-color: #ff4a4a; border-color: #ff4a4a; }
+
+    .btn-logout {
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 400;
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.6);
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    .btn-logout:hover {
+      color: var(--color-text-light);
+      text-decoration: underline;
+    }
+
+    /* 6. Estilização da Tabela (O mais importante) */
+    .table {
+      border-color: rgba(255, 255, 255, 0.15); /* Borda da tabela */
+      color: var(--color-text-light); /* Cor do texto */
+    }
+    
+    /* Células (th e td) */
+    .table th,
+    .table td {
+      border-color: rgba(255, 255, 255, 0.15);
+      vertical-align: middle; /* Centraliza verticalmente */
+    }
+    
+    /* Cabeçalho da Tabela (thead) */
+    .table thead th {
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      background-color: var(--color-dark-accent); /* Fundo do cabeçalho */
+      border-bottom-width: 2px;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Zebrado (Striped) customizado para modo escuro */
+    .table-striped > tbody > tr:nth-of-type(odd) > * {
+      background-color: rgba(0,0,0,0.1); /* Cor da linha ímpar */
+      color: var(--color-text-light);
+    }
+    .table-striped > tbody > tr:nth-of-type(even) > * {
+      background-color: transparent; /* Cor da linha par */
+      color: var(--color-text-light);
+    }
+    
+    /* Remove o estilo padrão do Bootstrap que conflita */
+    .table-striped > tbody > tr:nth-of-type(2n+1) {
+        --bs-table-accent-bg: transparent;
+    }
+    
+    /* Efeito Hover na Tabela */
+    .table-hover > tbody > tr:hover > * {
+        background-color: var(--color-dark-accent);
+        color: var(--color-text-light);
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container-fluid">
+    <div class="list-card">
+      
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="m-0">Painel de Contatos</h2>
+        <a href="{% url 'cadastrar' %}" class="btn btn-primary">
+          <i class="fas fa-plus me-2"></i>Cadastrar
+        </a>
+      </div>
+
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Nome</th><th>Telefone</th><th>Email</th><th>Observação</th><th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for contato in contacts %}
+          <tr>
+            <td>{{ contato.nome_completo }}</td>
+            <td>{{ contato.telefone }}</td>
+            <td>{{ contato.email }}</td>
+            <td>{{ contato.observacao }}</td>
+            <td>
+              <a href="{% url 'atualizar_contato' contato.id %}" class="btn btn-warning btn-sm">
+                <i class="fas fa-edit"></i>
+              </a>
+              <a href="{% url 'delete' contato.id %}" class="btn btn-danger btn-sm">
+                <i class="fas fa-trash-alt"></i>
+              </a>
+            </td>
+          </tr>
+          {% empty %}
+            <tr>
+              <td colspan="5" class="text-center p-4">Nenhum contato encontrado.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <a href="{% url 'logout' %}" class="btn btn-link btn-logout w-100 mt-4">
+        <i class="fas fa-sign-out-alt me-2"></i>Logout
+      </a>
+
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
