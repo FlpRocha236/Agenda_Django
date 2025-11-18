@@ -34,23 +34,23 @@
       
       /* Ajustado para permitir que o card grande respire */
       min-height: 100vh;
-      padding: 2rem 0; /* Adiciona padding vertical */
+      padding: 2rem 0; 
     }
 
-    /* 3. Card de Listagem (Mais largo para a tabela) */
+    /* 3. Card de Listagem*/
     .list-card {
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 0.75rem;
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-      background-color: rgba(26, 26, 26, 0.9); /* Fundo semi-transparente */
+      background-color: rgba(26, 26, 26, 0.9);
       color: var(--color-text-light);
       padding: 3rem;
-      width: 90%; /* Usa porcentagem para ser responsivo */
-      max-width: 1100px; /* Bem mais largo para a tabela */
-      margin: 0 auto; /* Centraliza */
+      width: 90%; 
+      max-width: 1100px; 
+      margin: 0 auto; 
     }
 
-    /* 4. Título ("Painel de Contatos") */
+    /* 4. Título */
     .list-card h2 {
       font-family: 'Oswald', sans-serif;
       font-weight: 700;
@@ -60,11 +60,11 @@
       text-shadow: 2px 2px 5px rgba(0,0,0,0.4);
     }
     
-    /* 5. Estilo dos Botões (Consistente com o tema) */
+    /* 5. Estilo dos Botões */
     .btn {
       font-family: 'Oswald', sans-serif;
       font-weight: 600;
-      font-size: 1rem; /* Tamanho padrão para botões */
+      font-size: 1rem; 
       padding: 0.6rem 1.2rem;
       border-radius: 0.5rem;
       text-transform: uppercase;
@@ -91,7 +91,7 @@
     .btn-warning {
       background-color: var(--color-warning-rock);
       border-color: var(--color-warning-rock);
-      color: var(--color-dark-bg); /* Texto escuro para contraste */
+      color: var(--color-dark-bg); 
     }
     .btn-warning:hover { background-color: #ffdd44; border-color: #ffdd44; }
 
@@ -114,37 +114,37 @@
       text-decoration: underline;
     }
 
-    /* 6. Estilização da Tabela (O mais importante) */
+    /* 6. Estilização da Tabela */
     .table {
-      border-color: rgba(255, 255, 255, 0.15); /* Borda da tabela */
-      color: var(--color-text-light); /* Cor do texto */
+      border-color: rgba(255, 255, 255, 0.15);
+      color: var(--color-text-light); 
     }
     
-    /* Células (th e td) */
+    /* Células */
     .table th,
     .table td {
       border-color: rgba(255, 255, 255, 0.15);
-      vertical-align: middle; /* Centraliza verticalmente */
+      vertical-align: middle; 
     }
     
-    /* Cabeçalho da Tabela (thead) */
+    /* Cabeçalho da Tabela */
     .table thead th {
       font-family: 'Oswald', sans-serif;
       text-transform: uppercase;
       letter-spacing: 1px;
       font-weight: 600;
-      background-color: var(--color-dark-accent); /* Fundo do cabeçalho */
+      background-color: var(--color-dark-accent);
       border-bottom-width: 2px;
       border-color: rgba(255, 255, 255, 0.2);
     }
 
     /* Zebrado (Striped) customizado para modo escuro */
     .table-striped > tbody > tr:nth-of-type(odd) > * {
-      background-color: rgba(0,0,0,0.1); /* Cor da linha ímpar */
+      background-color: rgba(0,0,0,0.1);
       color: var(--color-text-light);
     }
     .table-striped > tbody > tr:nth-of-type(even) > * {
-      background-color: transparent; /* Cor da linha par */
+      background-color: transparent;
       color: var(--color-text-light);
     }
     
@@ -202,11 +202,9 @@
           {% endfor %}
         </tbody>
       </table>
-
-      <a href="{% url 'logout' %}" class="btn btn-link btn-logout w-100 mt-4">
-        <i class="fas fa-sign-out-alt me-2"></i>Logout
-      </a>
-
+      <div class="d-grid gap-2 mt-4">
+        <a href="{% url 'home' %}" class="btn btn-secondary">Voltar</a>
+      </div>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
